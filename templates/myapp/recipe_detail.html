@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+    <h1>レシピ詳細ページ</h1>
+    <p>タイトル:{{ recipe.title }}</p>
+    <p>カテゴリー:{{ recipe.category.name }}</p>
+    <p>材料:{{ recipe.items }}</p>
+    <p>作り方:{{ recipe.steps }}</p>
+    <p>調理時間:{{ recipe.cook_time }}</p>
+    <p>作成日:{{ recipe.created_date|date:"Y年m月d日" }}</p>
+
+    {% if recipe.tags.all %}
+    <p>タグ：
+    {% for tag in recipe.tags.all %}
+        <span class="tag">{{ tag.name }}</span>{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    </p>
+    {% endif %}
+
+</body>
+
+{% endblock %}

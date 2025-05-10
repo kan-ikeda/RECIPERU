@@ -1,0 +1,33 @@
+<!-- search_results.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+    <h1>検索結果</h1>
+    
+    {% if query %}
+        <h2>検索キーワード: {{ query }}</h2>
+        {% if recipes %}
+            <ul>
+                {% for recipe in recipes %}
+                    <li>
+                        <h3>{{ recipe.title }}</h3>
+                        <p>材料:{{ recipe.items }}</p>
+                        <p>作り方:{{ recipe.steps }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>該当するレシピが見つかりませんでした。</p>
+        {% endif %}
+    {% else %}
+        <p>検索キーワードを入力してください。</p>
+    {% endif %}
+    
+    <a href="{% url 'recipe_search' %}">検索フォームに戻る</a>
+</body>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,37 @@
+<!-- search_form.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+    <h1>レシピ検索</h1>
+
+    <form method="get">
+        {% csrf_token %}
+        {{ form.query.label_tag }}
+        {{ form.query }}
+        <button type="submit">検索</button>
+    </form>
+
+    {% if query %}
+        <h2>検索キーワード: {{ query }}</h2>
+        {% if recipes %}
+            <ul>
+                {% for recipe in recipes %}
+                    <li>
+                        <h3>{{ recipe.title }}</h3>
+                        <p>材料: {{ recipe.ingredients }}</p>
+                        <p>作り方: {{ recipe.instructions }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>該当するレシピが見つかりませんでした。</p>
+        {% endif %}
+    {% else %}
+        <p>検索キーワードを入力してください。</p>
+    {% endif %}
+</body>
+
+
+{% endblock %}
+

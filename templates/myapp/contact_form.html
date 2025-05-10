@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+    <h1>お問い合わせ</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- フォームを段落形式で表示 -->
+        <button type="submit">送信</button>
+    </form>
+</body>
+
+{% endblock %}
