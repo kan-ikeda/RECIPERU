@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'myapp'
 urlpatterns = [
@@ -13,3 +15,6 @@ urlpatterns = [
     path('contact/', views.ContactFormView.as_view(), name='contact_form'), #お問い合わせフォーム
     path('search/',views.RecipeSearchFormView.as_view(), name='recipe_search_form'), #レシピ検索
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

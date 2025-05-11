@@ -3,12 +3,13 @@
 
 <body>
     <h1>レシピ一覧</h1>
-    <ul>
-        {% for recipe in recipes %}
-            <li>{{ recipe.title }}</li>
-            <li>{{ recipe.cook_time}}</li>
-        {% endfor %}
-    </ul>
+    {% for recipe in recipes %}
+        <h2>{{ recipe.title }}</h2>
+        <p>{{ recipe.cook_time}}分</p>
+        {% if recipe.image %}
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        {% endif %}
+    {% endfor %}
 </body>
 
 {% endblock %}

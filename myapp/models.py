@@ -23,6 +23,7 @@ class Tag(models.Model):
 #レシピモデル
 class Recipe(models.Model):
     title = models.CharField('タイトル', max_length=100)
+    image = models.ImageField('画像', upload_to='recipes/', blank=True, null=True)
     items = models.TextField('材料', blank=True, null=True)
     steps = models.TextField('作り方', blank=True, null=True)
     cook_time = models.IntegerField('調理時間', blank=True, null=True)
