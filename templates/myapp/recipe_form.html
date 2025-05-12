@@ -1,17 +1,53 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/recipe_form.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <body>
-    <h1>レシピ作成、編集ページ</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="作成">
-    </form>
-    <form method="post" action="{% url 'myapp:logout' %}">
-        {% csrf_token %}
-        <button type="submit">ログアウト</button>
-    </form>
+    <div class="recipe_form_body">
+        <h1>レシピ投稿</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <div class="title">{{ form.title }}</div>
+                <div class="itemstep">
+                    <div class="items">
+                        <h4>材料</h4>
+                        {{ form.items }}
+                    </div>
+                    <div class="steps">
+                        <h4>作り方</h4>
+                        {{ form.steps }}
+                    </div>
+                </div>
+                <div class="cook_time">
+                    <h4>調理時間：</h4>
+                    {{ form.cook_time}}
+                    <h4>分</h4>
+                </div>
+                <div class="image">{{ form.image}}</div>
+                <div class="categorytag">
+                    <div class="category">
+                        <h4>カテゴリー</h4>
+                        {{ form.category }}
+                    </div>
+                    <div class="tags">
+                        <h4>タグ</h4>
+                        {{ form.tags}}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn_recipe_create">レシピ作成</button>
+        </form>
+        <form method="post" action="{% url 'myapp:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn_logout">ログアウト</button>
+        </form>
+    </div>
 </body>
 
 {% endblock %}
