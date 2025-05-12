@@ -19,6 +19,9 @@ class RecipeCreateView(CreateView):
     form_class = RecipeForm
     template_name = 'myapp/recipe_form.html'
     success_url = reverse_lazy('myapp:recipe_list')
+    def form_valid(self, form):
+        form.instance.image = self.request.FILES.get('image')
+        return super().form_valid(form)
 
 #レシピ詳細
 class RecipeDetailView(DetailView):
@@ -32,6 +35,13 @@ class RecipeUpdateView(UpdateView):
     form_class = RecipeForm
     template_name = 'myapp/recipe_form.html'
     success_url = reverse_lazy('myapp:recipe_list')
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = RecipeForm(request.POST, request.FILES, instance=self.object)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 #レシピ削除
 class RecipeDeleteView(DeleteView):

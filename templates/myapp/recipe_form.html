@@ -3,7 +3,8 @@
 
 <body>
     <h1>レシピ作成、編集ページ</h1>
-    <form method="post">{% csrf_token %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="作成">
     </form>
