@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<!-- <link rel="stylesheet" href="{% static 'css/recipe_list.css' %}"> -->
+{% endblock %}
+
+{% block content %}
+<h2>ログイン</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label for="id_username">メールアドレス:</label>
+        <input type="text" name="username" id="id_username">
+    </p>
+    <p>
+        <label for="id_password">パスワード:</label>
+        <input type="password" name="password" id="id_password">
+    </p>
+    <button type="submit">ログイン</button>
+    <p>
+        アカウントをお持ちでない方は<a href="{% url 'accounts:signup' %}">こちら</a>から新規登録してください。
+    </p>
+</form>
+{% endblock %}

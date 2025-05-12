@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -30,6 +31,7 @@ class Recipe(models.Model):
     created_date = models.DateTimeField('作成日', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='所属カテゴリー')
     tags = models.ManyToManyField(Tag, related_name='所属タグ')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
