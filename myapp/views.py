@@ -4,6 +4,7 @@ from .models import Recipe, Category, Contact
 from .form import RecipeForm, SearchForm, ContactForm
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -14,12 +15,14 @@ class RecipeList(ListView):
     context_object_name = 'recipes'
 
 #レシピ作成
-class RecipeCreateView(CreateView):
+class RecipeCreateView(LoginRequiredMixin, CreateView):  # LoginRequiredMixinを追加
     model = Recipe
     form_class = RecipeForm
     template_name = 'myapp/recipe_form.html'
     success_url = reverse_lazy('myapp:recipe_list')
+
     def form_valid(self, form):
+        form.instance.author = self.request.user  # ログインユーザーを作者として設定
         form.instance.image = self.request.FILES.get('image')
         return super().form_valid(form)
 
