@@ -1,15 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/recipe_list.css' %}">
+{% endblock %}
+
 {% block content %}
-
-<body>
-    <h1>レシピ一覧</h1>
-    {% for recipe in recipes %}
-        <h2>{{ recipe.title }}</h2>
-        <p>{{ recipe.cook_time}}分</p>
-        {% if recipe.image %}
-            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
-        {% endif %}
-    {% endfor %}
-</body>
-
+    <div class="body">
+        <div class="headline">
+            <h1>みんなのレシピ</h1>
+        </div>
+        <div class="recipe_contents">
+            {% for recipe in recipes %}
+                <div class="recipe_item">
+                    {% if recipe.image %}
+                        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+                    {% endif %}
+                    <h2>{{ recipe.title }}</h2>
+                    <p>調理時間：{{ recipe.cook_time}}分</p>
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
