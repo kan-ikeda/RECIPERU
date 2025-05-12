@@ -1,0 +1,18 @@
+.recipe_ditail_body{
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: calc((100% - 700px) / 2); 
+    margin-right: calc((100% - 700px) / 2);
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+}
+
+.recipe_ditail_body img{
+    width: 100%;
+    height: auto;
+}

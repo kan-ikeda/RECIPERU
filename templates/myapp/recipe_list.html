@@ -16,7 +16,9 @@
                     {% if recipe.image %}
                         <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
                     {% endif %}
-                    <h2>{{ recipe.title }}</h2>
+                    <h2>
+                        <a href="{% url 'myapp:recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a>
+                    </h2>
                     <p>調理時間：{{ recipe.cook_time}}分</p>
                     
                 </div>
