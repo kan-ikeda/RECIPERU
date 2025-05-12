@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 app_name = 'myapp'
 urlpatterns = [
@@ -14,6 +15,7 @@ urlpatterns = [
     path('categories/<int:pk>/', views.CategoryRecipesView.as_view(), name='category_recipes'), #カテゴリ別レシピ一覧
     path('contact/', views.ContactFormView.as_view(), name='contact_form'), #お問い合わせフォーム
     path('search/',views.RecipeSearchFormView.as_view(), name='recipe_search_form'), #レシピ検索
+    path('logout/', auth_views.LogoutView.as_view(next_page='myapp:recipe_list'), name='logout'),
 ]
 
 if settings.DEBUG:
